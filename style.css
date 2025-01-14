@@ -1,18 +1,28 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     background-color: black;
 }
-.count{
-    width: 88%;
-    height: 150px;
+
+.count {
+    width: 96%;
+    height: 100px;
     background-color: yellow;
-    border-radius: 60px;
-    border: 25px solid orange;
+    border-radius: 30px;
+    border: 8px solid orange;
+    text-align: center;
 }
-.wish{
+#count{
+    position: relative;
+    top: 37px;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+}
+.wish {
     background-color: cyan;
     width: 94%;
     height: 200px;
@@ -21,7 +31,8 @@ body{
     margin-top: 16%;
     border: 12px solid green;
 }
-#wish{
+
+#wish {
     font-size: 57px;
     color: blue;
     font-weight: bolder;
