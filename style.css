@@ -15,13 +15,15 @@ body {
     border: 8px solid orange;
     text-align: center;
 }
-#count{
+
+#count {
     position: relative;
     top: 37px;
     color: red;
     font-weight: bold;
     font-size: 20px;
 }
+
 .wish {
     background-color: cyan;
     width: 94%;
@@ -59,7 +61,6 @@ body {
     font-size: 33px;
 
 }
-
 .magic span{
     position: relative;
     top: 21px;
