@@ -1,4 +1,7 @@
-// Set the target date and time
+//  Not written by me (Persnally used by ChatGPT) 
+ 
+ 
+ // Set the target date and time
  const targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
  // Function to update the countdown
@@ -26,13 +29,34 @@
  const interval = setInterval(updateCountdown, 1000);
 
 
- //New Idea
- document.getElementById('magicSpan').addEventListener('click', function() {
-    // Show the surprise container
-    document.getElementById('surpriseContainer').classList.remove('hidden');
+// //  //New Idea
+//  document.getElementById('magicSpan').addEventListener('click', function() {
+//     // Show the surprise container
+//     document.getElementById('surpriseContainer').classList.remove('hidden');
     
-    // Play a celebration sound (optional)
-    let audio = new Audio('celebration.mp3');
-    audio.play();
-  });
+//     // Play a celebration sound (optional)
+//     let audio = new Audio('celebration.mp3');
+//     audio.play();
+//   });
   
+
+// Load the celebration sound only once
+const audio = new Audio("audio.mp3");
+audio.loop = true; // Ensure the song loops continuously
+
+// Add click event listener
+document.getElementById('magicSpan').addEventListener('click', function() {
+    // Show the surprise container
+    const surpriseContainer = document.getElementById('surpriseContainer');
+    surpriseContainer.classList.remove('hidden');
+
+    // Start playing the song (only if it’s not already playing)
+    if (audio.paused) {
+        audio.play();
+    }
+
+    // Hide the surprise container after 8 seconds
+    setTimeout(function() {
+        surpriseContainer.classList.add('hidden');
+    }, 8000); // 8000 milliseconds = 8 seconds
+});
