@@ -1,4 +1,4 @@
- // Set the target date and time
+// Set the target date and time
  const targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
  // Function to update the countdown
@@ -24,3 +24,15 @@
 
  // Update the countdown every second
  const interval = setInterval(updateCountdown, 1000);
+
+
+ //New Idea
+ document.getElementById('magicSpan').addEventListener('click', function() {
+    // Show the surprise container
+    document.getElementById('surpriseContainer').classList.remove('hidden');
+    
+    // Play a celebration sound (optional)
+    let audio = new Audio('celebration.mp3');
+    audio.play();
+  });
+  
