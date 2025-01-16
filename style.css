@@ -106,14 +106,11 @@ body {
     background-size: auto;
     z-index: -1;
   }
-  #balloons{
-    z-index: 0;
-    background-repeat: no-repeat;
-  }
   
   #balloons {
     background-image: url("balloons.gif");
     animation: rise 5s infinite;
+    /* background-repeat: no-repeat; */
   }
   
   #fireworks {
