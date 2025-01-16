@@ -58,10 +58,85 @@ body {
     border: 4px solid mediumspringgreen;
     margin: auto;
     color: cyan;
-    font-size: 33px;
+    font-size: 30px;
+    text-align: center;
 
 }
 .magic span{
     position: relative;
     top: 21px;
 }
+
+/* New Idea */
+.magic {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #magicSpan {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 24px;
+    color: white;
+    background: #ff1493;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #magicSpan:hover {
+    background: #ff69b4;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #cake {
+    width: 415px;
+    margin: 20px auto;
+  }
+  
+  #balloons, #fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: auto;
+    z-index: -1;
+  }
+  #balloons{
+    z-index: 0;
+    background-repeat: no-repeat;
+  }
+  
+  #balloons {
+    background-image: url("balloons.gif");
+    animation: rise 5s infinite;
+  }
+  
+  #fireworks {
+    background-image: url("fireworks.gif");
+    opacity: 0.8;
+  }
+  
+  #birthdayText {
+    font-size: 2rem;
+    color: #ff1493;
+    text-align: center;
+    animation: textAppear 2s ease-in-out;
+  }
+  
+  /* Balloons rising animation */
+  @keyframes rise {
+    0% { top: 100%; }
+    100% { top: -10%; }
+  }
+  
+  /* Birthday text animation */
+  @keyframes textAppear {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
