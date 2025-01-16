@@ -1,7 +1,4 @@
-//  Not written by me (Persnally used by ChatGPT) 
- 
- 
- // Set the target date and time
+// Set the target date and time
  const targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
  // Function to update the countdown
