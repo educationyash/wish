@@ -1,339 +1,225 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+//  Not written by me (Persnally used by ChatGPT) 
+ 
+ 
+ // Set the target date and time
+ const targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
-body {
-    background-color: black;
-}
+ // Function to update the countdown
+ function updateCountdown() {
+     const now = new Date().getTime();
+     const timeRemaining = targetDate - now;
 
-.count {
-    width: 96%;
-    height: 100px;
-    background-color: yellow;
-    border-radius: 30px;
-    border: 8px solid orange;
-    text-align: center;
-}
+     if (timeRemaining <= 0) {
+         document.getElementById('count').innerHTML = 'Happy Birthday Rohan';
+         clearInterval(interval);
+         return;
+     }
 
-#count {
-    position: relative;
-    top: 37px;
-    color: red;
-    font-weight: bold;
-    font-size: 20px;
-}
+     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-.wish {
-    background-color: cyan;
-    width: 94%;
-    height: 200px;
-    text-align: center;
-    border-radius: 78px;
-    margin-top: 16%;
-    border: 12px solid green;
-}
+     document.getElementById('count').innerHTML = 
+         `${days} days : ${hours.toString().padStart(2, '0')} hours : ` +
+         `${minutes.toString().padStart(2, '0')} minutes : ${seconds.toString().padStart(2, '0')} seconds`;
+ }
 
-#wish {
-    font-size: 57px;
-    color: blue;
-    font-weight: bolder;
-    position: relative;
-    /* top: 37%; */
-}
+ // Update the countdown every second
+ const interval = setInterval(updateCountdown, 1000);
 
-.span {
-    color: white;
-    float: right;
-    font-size: 23px;
-    margin-top: 109px;
-}
 
-.magic{
-    margin-top: 40px !important;
-    width: 250px;
-    height: 80px;
-    background-color: brown;
-    border-radius: 40px;
-    border: 4px solid mediumspringgreen;
-    margin: auto;
-    color: cyan;
-    font-size: 30px;
-    text-align: center;
-
-}
-.magic span{
-    position: relative;
-    top: 21px;
-}
-
-/* New Idea */
-.magic {
-    text-align: center;
-    margin-top: 20px;
-  }
+// //  //New Idea
+//  document.getElementById('magicSpan').addEventListener('click', function() {
+//     // Show the surprise container
+//     document.getElementById('surpriseContainer').classList.remove('hidden');
+    
+//     // Play a celebration sound (optional)
+//     let audio = new Audio('celebration.mp3');
+//     audio.play();
+//   });
   
-  #magicSpan {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 24px;
-    color: white;
-    background: #ff1493;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+
+// Load the celebration sound only once
+const audio = new Audio("audio.mp3");
+audio.loop = true; // Ensure the song loops continuously
+
+// Add click event listener
+document.getElementById('magicSpan').addEventListener('click', function() {
+    // Show the surprise container
+    const surpriseContainer = document.getElementById('surpriseContainer');
+    surpriseContainer.classList.remove('hidden');
+
+    const need = document.getElementById('need');
+    need.classList.remove('hidden')
+    // Start playing the song (only if it’s not already playing)
+    if (audio.paused) {
+        audio.play();
+    }
+
+    // Hide the surprise container after 8 seconds
+    setTimeout(function() {
+        surpriseContainer.classList.add('hidden');
+    }, 60000); // 60000 milliseconds = 60 seconds
+});
+
+// Quiz
+const quizQuestions = [
+    {
+        question: "What is Rohan's favorite color?",
+        options: ["Blue", "Red", "Green", "Yellow"],
+        answer: "Blue"
+    },
+    {
+        question: "Which sport does Rohan like the most?",
+        options: ["Cricket", "Football", "Basketball", "Tennis"],
+        answer: "Cricket"
+    },
+    {
+        question: "What is Rohan's zodiac sign?",
+        options: ["Libra", "Virgo", "Leo", "Scorpio"],
+        answer: "Libra"
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function loadQuizQuestion() {
+    const quizContainer = document.getElementById('quizContainer');
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizScore = document.getElementById('quizScore');
+
+    const question = quizQuestions[currentQuestionIndex];
+    quizQuestion.textContent = question.question;
+    quizOptions.innerHTML = '';
+
+    question.options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.addEventListener('click', () => {
+            if (option === question.answer) {
+                score++;
+                alert("Correct! 🎉");
+            } else {
+                alert("Oops, wrong answer! 😅");
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuizQuestion();
+            } else {
+                quizScore.textContent = `Your final score: ${score}/${quizQuestions.length}`;
+                quizOptions.innerHTML = '';
+                document.getElementById('nextQuestion').style.display = 'none';
+            }
+        });
+        quizOptions.appendChild(button);
+    });
+}
+
+document.getElementById('magicSpan').addEventListener('click', () => {
+    document.getElementById('quizContainer').classList.remove('hidden');
+    loadQuizQuestion();
+});
+
+// Game
+// Number Balance Puzzle Game
+let leftTotal = 0;
+let rightTotal = 0;
+
+function startBalanceGame() {
+    const numberList = document.getElementById('numberList');
+    const leftTotalDisplay = document.getElementById('leftTotal');
+    const rightTotalDisplay = document.getElementById('rightTotal');
+    const gameResult = document.getElementById('gameResult');
+
+    // Reset totals and result
+    leftTotal = 0;
+    rightTotal = 0;
+    leftTotalDisplay.textContent = 'Total: 0';
+    rightTotalDisplay.textContent = 'Total: 0';
+    gameResult.textContent = '';
+
+    // Generate random numbers
+    numberList.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const number = document.createElement('div');
+        const value = Math.floor(Math.random() * 20) + 1; // Random number between 1-20
+        number.className = 'number';
+        number.textContent = value;
+        number.draggable = true;
+
+        // Add dragstart event
+        number.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text', value);
+        });
+
+        numberList.appendChild(number);
+    }
+
+    // Enable drop zones
+    const dropZones = document.querySelectorAll('.dropZone');
+    dropZones.forEach(zone => {
+        zone.innerHTML = ''; // Clear previous numbers
+        zone.addEventListener('dragover', (e) => e.preventDefault());
+        zone.addEventListener('drop', (e) => handleDrop(e, zone));
+    });
+}
+
+function handleDrop(event, zone) {
+    event.preventDefault();
+    const value = parseInt(event.dataTransfer.getData('text'));
+
+    // Add value to the correct total
+    if (zone.parentElement.id === 'leftScale') {
+        leftTotal += value;
+        document.getElementById('leftTotal').textContent = `Total: ${leftTotal}`;
+    } else {
+        rightTotal += value;
+        document.getElementById('rightTotal').textContent = `Total: ${rightTotal}`;
+    }
+
+    // Display the dropped number in the zone
+    const number = document.createElement('div');
+    number.className = 'number';
+    number.textContent = value;
+    zone.appendChild(number);
+
+    // Check if totals are balanced
+    if (leftTotal === rightTotal) {
+        document.getElementById('gameResult').textContent = 'Balanced! 🎉';
+        document.getElementById('gameResult').style.color = 'lime';
+    } else {
+        document.getElementById('gameResult').textContent = 'Not Balanced Yet! ⏳';
+        document.getElementById('gameResult').style.color = 'yellow';
+    }
+}
+
+function toggleBalanceGame() {
+    const gameContainer = document.getElementById('balanceGameContainer');
+    gameContainer.classList.toggle('hidden');
+    if (!gameContainer.classList.contains('hidden')) {
+        startBalanceGame();
+    }
+}
+
+
+// Message
+
+// Define the correct password
+const correctPassword = "rohan123";  // Replace with the password you want
+
+// Function to check password
+function checkPassword() {
+  const passwordInput = document.getElementById("password").value;
   
-  #magicSpan:hover {
-    background: #ff69b4;
+  if (passwordInput === correctPassword) {
+    // Show the message form
+    document.getElementById("message-form").classList.remove("hidden");
+    alert("Password correct! You can now upload a photo or send a message.");
+  } else {
+    alert("Incorrect password. Please try again.");
   }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #cake {
-    width: 415px;
-    margin: 20px auto;
-    border-radius: 30px;
-  }
-  
-  #balloons, #fireworks {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    z-index: -1;
-  }
-  
-  #balloons {
-    background-image: url("balloons.gif");
-    animation: rise 5s infinite;
-    /* background-repeat: no-repeat; */
-  }
-  
-  #fireworks {
-    background-image: url("fireworks.gif");
-    opacity: 0.8;
-  }
-  
-  #birthdayText {
-    font-size: 4rem;
-    color: #ff1493;
-    text-align: center;
-    animation: textAppear 2s ease-in-out infinite;
-  }
-  
-  /* Balloons rising animation */
-  @keyframes rise {
-    0% { top: 100%; }
-    100% { top: -10%; }
-  }
-  
-  /* Birthday text animation */
-  @keyframes textAppear {
-    0% { opacity: 0; transform: scale(0.5); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-video{
-  width: 410px;
-  margin-top: 20px;
-  border-radius: 40px;
-}
-
-
-/* Quiz */
-#quizContainer {
-  background: yellow;
-  border: 3px solid orange;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  width: 80%;
-  margin: auto;
-  font-size: 20px;
-  color: black;
-  margin-top: 30px;
-  height: 262px;
-}
-
-#quizQuestion {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#quizOptions button {
-  background: cyan;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-#quizOptions button:hover {
-  background: green;
-  color: white;
-}
-
-
-button {
-  background-color: orange;
-  color: black;
-  border: 2px solid cyan;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 5px;
-  transition: background-color 0.3s;
-}
-
-/* Game */
-/* Balance Game Styles */
-#balanceGameContainer {
-  margin-top: 142px;
-  text-align: center;
-  color: white;
-
-}
-
-.scales {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.scale {
-  width: 40%;
-  border: 2px solid white;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.scale h3 {
-  color: cyan;
-  margin-bottom: 10px;
-}
-
-.dropZone {
-  min-height: 100px;
-  border: 2px dashed cyan;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-.numberOptions {
-  margin-top: 20px;
-}
-
-.numberOptions h3 {
-  color: lightgreen;
-  margin-bottom: 10px;
-}
-
-.number {
-  display: inline-block;
-  background-color: orange;
-  color: black;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: grab;
-  font-weight: bold;
-  font-size: 18px;
-  transition: transform 0.2s ease;
-}
-
-.number:active {
-  cursor: grabbing;
-  transform: scale(1.2);
-}
-
-#gameResult {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-#resetGameButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: mediumspringgreen;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#resetGameButton:hover {
-  background-color: lightgreen;
-}
-
-
-/* Message */
-
-/* General Styles */
-
-.container {
-  text-align: center;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  width: 368px;
-  margin-top: 148px;
-}
-
-h2 {
-  color: #ff6347;
-}
-
-.button, input[type="submit"] {
-  background-color: #32cd32;
-  color: white;
-  padding: 10px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button:hover, input[type="submit"]:hover {
-  background-color: #28a745;
-}
-
-.hidden {
-  display: none;
-}
-
-input[type="password"], input[type="file"], textarea {
-  padding: 10px;
-  margin: 10px 0;
-  width: 93%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-h3 {
-  margin-bottom: 15px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-input[type="password"] {
-  width: 91% !important;
 }
