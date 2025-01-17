@@ -196,9 +196,10 @@ button {
 /* Game */
 /* Balance Game Styles */
 #balanceGameContainer {
-  margin-top: 50px;
+  margin-top: 142px;
   text-align: center;
   color: white;
+
 }
 
 .scales {
@@ -273,4 +274,66 @@ button {
 
 #resetGameButton:hover {
   background-color: lightgreen;
+}
+
+
+/* Message */
+
+/* General Styles */
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 368px;
+  margin-top: 148px;
+}
+
+h2 {
+  color: #ff6347;
+}
+
+.button, input[type="submit"] {
+  background-color: #32cd32;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover, input[type="submit"]:hover {
+  background-color: #28a745;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type="password"], input[type="file"], textarea {
+  padding: 10px;
+  margin: 10px 0;
+  width: 93%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+h3 {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="password"] {
+  width: 91% !important;
 }
