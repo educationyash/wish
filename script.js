@@ -59,3 +59,145 @@ document.getElementById('magicSpan').addEventListener('click', function() {
         surpriseContainer.classList.add('hidden');
     }, 60000); // 60000 milliseconds = 60 seconds
 });
+
+// Quiz
+const quizQuestions = [
+    {
+        question: "What is Rohan's favorite color?",
+        options: ["Blue", "Red", "Green", "Yellow"],
+        answer: "Blue"
+    },
+    {
+        question: "Which sport does Rohan like the most?",
+        options: ["Cricket", "Football", "Basketball", "Tennis"],
+        answer: "Cricket"
+    },
+    {
+        question: "What is Rohan's zodiac sign?",
+        options: ["Libra", "Virgo", "Leo", "Scorpio"],
+        answer: "Libra"
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function loadQuizQuestion() {
+    const quizContainer = document.getElementById('quizContainer');
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizScore = document.getElementById('quizScore');
+
+    const question = quizQuestions[currentQuestionIndex];
+    quizQuestion.textContent = question.question;
+    quizOptions.innerHTML = '';
+
+    question.options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.addEventListener('click', () => {
+            if (option === question.answer) {
+                score++;
+                alert("Correct! 🎉");
+            } else {
+                alert("Oops, wrong answer! 😅");
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuizQuestion();
+            } else {
+                quizScore.textContent = `Your final score: ${score}/${quizQuestions.length}`;
+                quizOptions.innerHTML = '';
+                document.getElementById('nextQuestion').style.display = 'none';
+            }
+        });
+        quizOptions.appendChild(button);
+    });
+}
+
+document.getElementById('magicSpan').addEventListener('click', () => {
+    document.getElementById('quizContainer').classList.remove('hidden');
+    loadQuizQuestion();
+});
+
+// Game
+// Number Balance Puzzle Game
+let leftTotal = 0;
+let rightTotal = 0;
+
+function startBalanceGame() {
+    const numberList = document.getElementById('numberList');
+    const leftTotalDisplay = document.getElementById('leftTotal');
+    const rightTotalDisplay = document.getElementById('rightTotal');
+    const gameResult = document.getElementById('gameResult');
+
+    // Reset totals and result
+    leftTotal = 0;
+    rightTotal = 0;
+    leftTotalDisplay.textContent = 'Total: 0';
+    rightTotalDisplay.textContent = 'Total: 0';
+    gameResult.textContent = '';
+
+    // Generate random numbers
+    numberList.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const number = document.createElement('div');
+        const value = Math.floor(Math.random() * 20) + 1; // Random number between 1-20
+        number.className = 'number';
+        number.textContent = value;
+        number.draggable = true;
+
+        // Add dragstart event
+        number.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text', value);
+        });
+
+        numberList.appendChild(number);
+    }
+
+    // Enable drop zones
+    const dropZones = document.querySelectorAll('.dropZone');
+    dropZones.forEach(zone => {
+        zone.innerHTML = ''; // Clear previous numbers
+        zone.addEventListener('dragover', (e) => e.preventDefault());
+        zone.addEventListener('drop', (e) => handleDrop(e, zone));
+    });
+}
+
+function handleDrop(event, zone) {
+    event.preventDefault();
+    const value = parseInt(event.dataTransfer.getData('text'));
+
+    // Add value to the correct total
+    if (zone.parentElement.id === 'leftScale') {
+        leftTotal += value;
+        document.getElementById('leftTotal').textContent = `Total: ${leftTotal}`;
+    } else {
+        rightTotal += value;
+        document.getElementById('rightTotal').textContent = `Total: ${rightTotal}`;
+    }
+
+    // Display the dropped number in the zone
+    const number = document.createElement('div');
+    number.className = 'number';
+    number.textContent = value;
+    zone.appendChild(number);
+
+    // Check if totals are balanced
+    if (leftTotal === rightTotal) {
+        document.getElementById('gameResult').textContent = 'Balanced! 🎉';
+        document.getElementById('gameResult').style.color = 'lime';
+    } else {
+        document.getElementById('gameResult').textContent = 'Not Balanced Yet! ⏳';
+        document.getElementById('gameResult').style.color = 'yellow';
+    }
+}
+
+function toggleBalanceGame() {
+    const gameContainer = document.getElementById('balanceGameContainer');
+    gameContainer.classList.toggle('hidden');
+    if (!gameContainer.classList.contains('hidden')) {
+        startBalanceGame();
+    }
+}
