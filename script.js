@@ -47,6 +47,8 @@ document.getElementById('magicSpan').addEventListener('click', function() {
     const surpriseContainer = document.getElementById('surpriseContainer');
     surpriseContainer.classList.remove('hidden');
 
+    const need = document.getElementById('need');
+    need.classList.remove('hidden')
     // Start playing the song (only if it’s not already playing)
     if (audio.paused) {
         audio.play();
@@ -55,5 +57,5 @@ document.getElementById('magicSpan').addEventListener('click', function() {
     // Hide the surprise container after 8 seconds
     setTimeout(function() {
         surpriseContainer.classList.add('hidden');
-    }, 8000); // 8000 milliseconds = 8 seconds
+    }, 60000); // 60000 milliseconds = 60 seconds
 });
