@@ -33,14 +33,48 @@
 
     <!-- New Idea -->
 
-        <div id="need" class="hidden"><video src="ROHAN Happy Birthday Song – Happy Birthday Rohan – Happy birthday to you - Happy Birthday Song with Names (720p, h264).mp4" autoplay muted></video></div>
+    <div id="need" class="hidden"><video src="ROHAN Happy Birthday Song – Happy Birthday Rohan – Happy birthday to you - Happy Birthday Song with Names (720p, h264).mp4" autoplay muted loop></video></div>
     <div id="surpriseContainer" class="hidden">
-    <img src="cake.png" alt="Birthday Cake" id="cake">
-    <div id="balloons"></div>
-    <div id="fireworks"></div>
-    <h2 id="birthdayText">Happy Birthday Rohan!</h2>
-  </div>
+        <img src="cake.png" alt="Birthday Cake" id="cake">
+        <div id="balloons"></div>
+        <div id="fireworks"></div>
+        <h2 id="birthdayText">Happy Birthday Rohan!</h2>
+    </div>
+    
+    <!-- Quiz -->
+    <div id="quizContainer" class="hidden">
+        <h2>How Well Do You Know Rohan?</h2>
+        <div id="quizQuestion"></div>
+        <div id="quizOptions"></div>
+        <button id="nextQuestion">Next</button>
+        <div id="quizScore"></div>
+        <button onclick="toggleBalanceGame()" style="position: relative;top: 94px;">Play Number Balance Puzzle</button>
+    </div>
 
+  <!-- Game -->
+
+  <div id="balanceGameContainer" class="hidden">
+    <h2 class="gameTitle">Number Balance Puzzle</h2>
+    <p class="gameInstruction">Drag and drop numbers into the left and right scales to balance their totals!</p>
+    <div class="scales">
+        <div id="leftScale" class="scale">
+            <h3>Left Scale</h3>
+            <div class="dropZone"></div>
+            <p id="leftTotal">Total: 0</p>
+        </div>
+        <div id="rightScale" class="scale">
+            <h3>Right Scale</h3>
+            <div class="dropZone"></div>
+            <p id="rightTotal">Total: 0</p>
+        </div>
+    </div>
+    <div class="numberOptions">
+        <h3>Drag These Numbers</h3>
+        <div id="numberList"></div>
+    </div>
+    <p id="gameResult"></p>
+    <button id="resetGameButton" onclick="startBalanceGame()">Reset Game</button>
+</div>
 
     <!-- End Idea -->
     <div class="span">Created by Yash Arora on 14 January 2025</div>
