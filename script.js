@@ -201,3 +201,22 @@ function toggleBalanceGame() {
         startBalanceGame();
     }
 }
+
+
+// Message
+
+// Define the correct password
+const correctPassword = "rohan123";  // Replace with the password you want
+
+// Function to check password
+function checkPassword() {
+  const passwordInput = document.getElementById("password").value;
+  
+  if (passwordInput === correctPassword) {
+    // Show the message form
+    document.getElementById("message-form").classList.remove("hidden");
+    alert("Password correct! You can now upload a photo or send a message.");
+  } else {
+    alert("Incorrect password. Please try again.");
+  }
+}
