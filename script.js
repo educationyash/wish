@@ -215,8 +215,27 @@ function checkPassword() {
   if (passwordInput === correctPassword) {
     // Show the message form
     document.getElementById("message-form").classList.remove("hidden");
-    alert("Password correct! You can now upload a photo or send a message.");
+    alert("Password correct! You can now  send a message.");
   } else {
     alert("Incorrect password. Please try again.");
   }
 }
+
+
+//Email
+ // Add event listener to the form
+ document.getElementById("form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get the message content
+    const message = encodeURIComponent(document.getElementById("message").value);
+
+    // Create the mailto link
+    const mailtoLink = `mailto:myyasheducational@gmail.com?subject=Greeting by Rohan&body=${message}`;
+
+    // Open the mail client
+    window.location.href = mailtoLink;
+
+    // Reset the form
+    this.reset();
+  });
