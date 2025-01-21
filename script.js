@@ -206,7 +206,7 @@ function toggleBalanceGame() {
 // Message
 
 // Define the correct password
-const correctPassword = "rohan123";  // Replace with the password you want
+const correctPassword = "rohanbro26";  // Replace with the password you want
 
 // Function to check password
 function checkPassword() {
