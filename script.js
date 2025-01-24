@@ -231,7 +231,8 @@ function checkPassword() {
     const message = encodeURIComponent(document.getElementById("message").value);
 
     // Create the mailto link
-    const mailtoLink = `mailto:myyasheducational@gmail.com?subject=Greeting by Rohan&body=${message}`;
+    //const mailtoLink = `mailto:myyasheducational@gmail.com?subject=Greeting by Rohan&body=${message}`;
+const mailtoLink = `https://wa.me/+919784317690?text=Greeting by Rohan+${message}`;
 
     // Open the mail client
     window.location.href = mailtoLink;
