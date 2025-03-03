@@ -2,88 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Rohan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Rohan</title>
 
-    <link rel="icon" type="image/x-icon" href="facicon.ico">
+  <link rel="icon" type="image/x-icon" href="facicon.ico">
 
-    <!-- Meta Description: This should be a brief summary of your website -->
-    <meta name="description" content="Celebrate Rohan's birthday with a fun countdown! Created by Yash Arora. Click the button to see the magic!">
+  <!-- Meta Description: This should be a brief summary of your website -->
+  <meta name="description"
+    content="Celebrate Rohan's birthday with a fun countdown! Created by Yash Arora. Click the button to see the magic!">
 
-    <!-- Meta Keywords: Add relevant keywords separated by commas -->
-    <meta name="keywords" content="happy birthday rohan, happy birthday, yash arora, education yash, yash education, github, birthday countdown, birthday surprise, fun birthday website">
+  <!-- Meta Keywords: Add relevant keywords separated by commas -->
+  <meta name="keywords"
+    content="happy birthday rohan, happy birthday, yash arora, education yash, yash education, github, birthday countdown, birthday surprise, fun birthday website">
 
-    <!-- Author  -->
-    <meta name="author" content="Yash Arora">
+  <!-- Author  -->
+  <meta name="author" content="Yash Arora">
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="count">
-        <span id="count"></span>
-    </div>
-    <div class="wish">
-        <h1 id="wish">Happy Birthday Rohan</h1>
-    </div>
-    <div class="magic">
-        <span id="magicSpan">Click to see magic</span>
-    </div>
+  <div class="count">
+    <span id="count"></span>
+  </div>
+  <div class="wish">
+    <h1 id="wish">Happy Birthday <br><span id="real">Rohan</span> </h1>
+  </div>
+  <div class="magic">
+    <span id="magicSpan">Click to see magic</span>
+  </div>
 
-    <!-- New Idea -->
+  <!-- New Idea -->
 
-    <div id="need" class="hidden"><video src="ROHAN Happy Birthday Song – Happy Birthday Rohan – Happy birthday to you - Happy Birthday Song with Names (720p, h264).mp4" autoplay muted loop></video></div>
-    <div id="surpriseContainer" class="hidden">
-        <img src="cake.png" alt="Birthday Cake" id="cake">
-        <div id="balloons"></div>
-        <!-- Testing -->
-        <img src="rohan.jpg" width=400px>
-        <div id="fireworks"></div>
-        <h2 id="birthdayText">Happy Birthday Rohan!</h2>
-    </div>
-    
-    <!-- Quiz -->
-    <div id="quizContainer" class="hidden">
-        <h2>How Well Do You Know Rohan?</h2>
-        <div id="quizQuestion"></div>
-        <div id="quizOptions"></div>
-        <button id="nextQuestion">Next</button>
-        <div id="quizScore"></div>
-        <button onclick="toggleBalanceGame()" style="position: relative;top: 94px;">Play Number Balance Puzzle</button>
-    </div>
+  <div id="need" class="hidden"><video
+      src="ROHAN Happy Birthday Song – Happy Birthday Rohan – Happy birthday to you - Happy Birthday Song with Names (720p, h264).mp4"
+      autoplay muted loop></video></div>
+  <div id="surpriseContainer" class="hidden">
+    <img src="cake.png" alt="Birthday Cake" id="cake">
+    <div id="balloons"></div>
+    <!-- Testing -->
+    <img src="rohan.jpg" width=400px>
+    <div id="fireworks"></div>
+    <h2 id="birthdayText">Happy Birthday <br><span id="realNew">Rohan!</span></h2>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quizContainer" class="hidden">
+    <h2>How Well Do You Know Rohan?</h2>
+    <div id="quizQuestion"></div>
+    <div id="quizOptions"></div>
+    <button id="nextQuestion">Next</button>
+    <div id="quizScore"></div>
+    <button onclick="toggleBalanceGame()" style="position: relative;top: 94px;">Play Number Balance Puzzle</button>
+  </div>
 
   <!-- Game -->
 
-  <div id=  "balanceGameContainer" class="hidden">
+  <div id="balanceGameContainer" class="hidden">
     <h2 class="gameTitle">Number Balance Puzzle</h2>
     <p class="gameInstruction">Drag and drop numbers into the left and right scales to balance their totals!</p>
     <div class="scales">
-        <div id="leftScale" class="scale">
-            <h3>Left Scale</h3>
-            <div class="dropZone"></div>
-            <p id="leftTotal">Total: 0</p>
-        </div>
-        <div id="rightScale" class="scale">
-            <h3>Right Scale</h3>
-            <div class="dropZone"></div>
-            <p id="rightTotal">Total: 0</p>
-        </div>
+      <div id="leftScale" class="scale">
+        <h3>Left Scale</h3>
+        <div class="dropZone"></div>
+        <p id="leftTotal">Total: 0</p>
+      </div>
+      <div id="rightScale" class="scale">
+        <h3>Right Scale</h3>
+        <div class="dropZone"></div>
+        <p id="rightTotal">Total: 0</p>
+      </div>
     </div>
     <div class="numberOptions">
-        <h3>Drag These Numbers</h3>
-        <div id="numberList"></div>
+      <h3>Drag These Numbers</h3>
+      <div id="numberList"></div>
     </div>
     <p id="gameResult"></p>
     <button id="resetGameButton" onclick="startBalanceGame()">Reset Game</button>
-</div>
-    
+  </div>
 
-                                                             <!-- Message -->
-     <!-- Main Container -->
+
+  <!-- Message -->
+  <!-- Main Container -->
   <div class="container">
     <h2>Contact Developer</h2>
-    
+
     <!-- Password Input Section -->
     <div id="password-section">
       <input type="password" id="password" placeholder="Enter Password" required>
@@ -110,10 +114,18 @@
       </form>
     </div>
   </div>
-    <!-- End Idea -->
-    <div class="span">Created by Yash Arora on 14 January 2025</div>
+  <!-- End Idea -->
+  <center><button class="update" onclick="update()" style="margin: 40px;">Let's Create</button></center>
+  <div class="custom">
+    <label for="name" style="color: orange;">Enter Name:</label>
+    <input type="text" name="" id="name" size="25.6"><br><br>
+    <label for="dob" style="color: orange;">Birthday Date:</label>
+    <input type="datetime-local" name="" id="dob"><br>
+    <input type="submit" value="Submit" onclick="setCountdown()">
+  </div>
+  <div class="span">Created by Yash Arora on 14 January 2025</div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
