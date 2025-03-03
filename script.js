@@ -1,5 +1,5 @@
 // Set the target date and time
- const targetDate = new Date('September 25, 2025 00:00:00').getTime();
+ let targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
  // Function to update the countdown
  function updateCountdown() {
@@ -240,3 +240,53 @@ const mailtoLink = `https://wa.me/+919784317690?text=Greeting by Rohan: +${messa
     // Reset the form
     this.reset();
   });
+
+
+// //New Idea for Updatation
+
+function update() {
+    let customElement = document.getElementsByClassName("custom")[0];
+    let check = customElement.style.display;
+
+    if (check === "none" || check === "") {
+        customElement.style.display = "block";
+    } else {
+        customElement.style.display = "none";
+    }
+}
+
+//Now Edit
+
+// Default target date (September 25, 2025)
+// let targetDate = new Date('September 25, 2025 00:00:00').getTime();
+
+// Function to start/update countdown
+function updateTimer() {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    // document.getElementById("count").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
+}   
+
+
+// Function to update targetDate from user input
+function setCountdown() {
+    const userInput = document.getElementById("dob").value;
+    if (userInput) {
+        targetDate = new Date(userInput).getTime();
+    }
+    updateTimer(); // Immediately update UI
+    let userName = document.getElementById("name").value;
+    let userNameNew = document.getElementById("name").value;
+    document.getElementById("real").innerHTML = userName;
+    document.getElementById("realNew").innerHTML = userNameNew;
+}
+
+// Start the countdown and update every second
+updateTimer();
+setInterval(updateTimer, 1000);
