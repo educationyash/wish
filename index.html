@@ -30,26 +30,26 @@
     <h1 id="wish">Happy Birthday <br><span id="real">Rohan</span> </h1>
   </div>
   <div class="magic">
-    <span id="magicSpan">Click to see magic</span>
+    <span id="magicSpan" onclick="updateName()">Click to see magic</span>
   </div>
 
   <!-- New Idea -->
 
   <div id="need" class="hidden"><video
       src="ROHAN Happy Birthday Song – Happy Birthday Rohan – Happy birthday to you - Happy Birthday Song with Names (720p, h264).mp4"
-      autoplay muted loop></video></div>
+      autoplay muted loop id="rohanVideo"></video></div>
   <div id="surpriseContainer" class="hidden">
     <img src="cake.png" alt="Birthday Cake" id="cake">
     <div id="balloons"></div>
     <!-- Testing -->
-    <img src="rohan.jpg" width=400px>
+    <img src="rohan.jpg" width=400px id="rohanImage">
     <div id="fireworks"></div>
     <h2 id="birthdayText">Happy Birthday <br><span id="realNew">Rohan!</span></h2>
   </div>
 
   <!-- Quiz -->
   <div id="quizContainer" class="hidden">
-    <h2>How Well Do You Know Rohan?</h2>
+    <h2 id="quizHead">How Well Do You Know Rohan?</h2>
     <div id="quizQuestion"></div>
     <div id="quizOptions"></div>
     <button id="nextQuestion">Next</button>
@@ -118,10 +118,16 @@
   <center><button class="update" onclick="update()" style="margin: 40px;">Let's Create</button></center>
   <div class="custom">
     <label for="name" style="color: orange;">Enter Name:</label>
-    <input type="text" name="" id="name" size="25.6"><br><br>
-    <label for="dob" style="color: orange;">Birthday Date:</label>
-    <input type="datetime-local" name="" id="dob"><br>
-    <input type="submit" value="Submit" onclick="setCountdown()">
+    <input type="text" name="" id="name" size="25.7"><br><br>
+    <label for="dob" style="color: orange;">Wishing Time:</label>
+    <input type="datetime-local" name="" id="dob"><br><br>
+    <label for="photoUpload" style="color: orange;">Upload birthday person image(portrait):</label>
+    <input type="file" id="photoUpload" accept="image/*" style="border: none;">
+    <label for="photoUploadCake" style="color: orange;">Upload Cake Image:</label>
+    <input type="file" id="photoUploadCake" accept="image/*" style="border: none;">
+    <label for="videoUpload" style="color: orange;">Upload video for birthday(Optional)</label>
+    <input type="file" id="videoUpload" accept="video/*" style="border: none;">
+    <input type="submit" value="Submit" onclick="setCountdown();updateName()">
   </div>
   <div class="span">Created by Yash Arora on 14 January 2025</div>
 
