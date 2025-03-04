@@ -1,48 +1,48 @@
 // Set the target date and time
- let targetDate = new Date('September 25, 2025 00:00:00').getTime();
+let targetDate = new Date('September 25, 2025 00:00:00').getTime();
 
- // Function to update the countdown
- function updateCountdown() {
-     const now = new Date().getTime();
-     const timeRemaining = targetDate - now;
+// Function to update the countdown
+function updateCountdown() {
+    const now = new Date().getTime();
+    const timeRemaining = targetDate - now;
 
-     if (timeRemaining <= 0) {
-         document.getElementById('count').innerHTML = 'Happy Birthday Rohan';
-         clearInterval(interval);
-         return;
-     }
+    if (timeRemaining <= 0) {
+        document.getElementById('count').innerHTML = 'Happy Birthday Rohan';
+        clearInterval(interval);
+        return;
+    }
 
-     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-     document.getElementById('count').innerHTML = 
-         `${days} days : ${hours.toString().padStart(2, '0')} hours : ` +
-         `${minutes.toString().padStart(2, '0')} minutes : ${seconds.toString().padStart(2, '0')} seconds`;
- }
+    document.getElementById('count').innerHTML =
+        `${days} days : ${hours.toString().padStart(2, '0')} hours : ` +
+        `${minutes.toString().padStart(2, '0')} minutes : ${seconds.toString().padStart(2, '0')} seconds`;
+}
 
- // Update the countdown every second
- const interval = setInterval(updateCountdown, 1000);
+// Update the countdown every second
+const interval = setInterval(updateCountdown, 1000);
 
 
 // //  //New Idea
 //  document.getElementById('magicSpan').addEventListener('click', function() {
 //     // Show the surprise container
 //     document.getElementById('surpriseContainer').classList.remove('hidden');
-    
+
 //     // Play a celebration sound (optional)
 //     let audio = new Audio('celebration.mp3');
 //     audio.play();
 //   });
-  
+
 
 // Load the celebration sound only once
 const audio = new Audio("audio.mp3");
 audio.loop = true; // Ensure the song loops continuously
 
 // Add click event listener
-document.getElementById('magicSpan').addEventListener('click', function() {
+document.getElementById('magicSpan').addEventListener('click', function () {
     // Show the surprise container
     const surpriseContainer = document.getElementById('surpriseContainer');
     surpriseContainer.classList.remove('hidden');
@@ -55,12 +55,14 @@ document.getElementById('magicSpan').addEventListener('click', function() {
     }
 
     // Hide the surprise container after 8 seconds
-    setTimeout(function() {
+    setTimeout(function () {
         surpriseContainer.classList.add('hidden');
     }, 60000); // 60000 milliseconds = 60 seconds
 });
 
 // Quiz
+
+let user = "Rohan"
 const quizQuestions = [
     {
         question: "What is Rohan's favorite color?",
@@ -68,12 +70,12 @@ const quizQuestions = [
         answer: "Blue"
     },
     {
-        question: "Which sport does Rohan like the most?",
+        question: `Which sport does Rohan like the most?`,
         options: ["Cricket", "Football", "Basketball", "Tennis"],
         answer: "Cricket"
     },
     {
-        question: "What is Rohan's zodiac sign?",
+        question: `What is Rohan's zodiac sign?`,
         options: ["Libra", "Virgo", "Leo", "Scorpio"],
         answer: "Libra"
     }
@@ -210,21 +212,21 @@ const correctPassword = "rohanbro26";  // Replace with the password you want
 
 // Function to check password
 function checkPassword() {
-  const passwordInput = document.getElementById("password").value;
-  
-  if (passwordInput === correctPassword) {
-    // Show the message form
-    document.getElementById("message-form").classList.remove("hidden");
-    alert("Password correct! You can now  send a message.");
-  } else {
-    alert("Incorrect password. Please try again.");
-  }
+    const passwordInput = document.getElementById("password").value;
+
+    if (passwordInput === correctPassword) {
+        // Show the message form
+        document.getElementById("message-form").classList.remove("hidden");
+        alert("Password correct! You can now  send a message.");
+    } else {
+        alert("Incorrect password. Please try again.");
+    }
 }
 
 
 //Email
- // Add event listener to the form
- document.getElementById("form").addEventListener("submit", function (event) {
+// Add event listener to the form
+document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
 
     // Get the message content
@@ -232,14 +234,14 @@ function checkPassword() {
 
     // Create the mailto link
     //const mailtoLink = `mailto:myyasheducational@gmail.com?subject=Greeting by Rohan&body=${message}`;
-const mailtoLink = `https://wa.me/+919784317690?text=Greeting by Rohan: +${message}`;
+    const mailtoLink = `https://wa.me/+919784317690?text=Greeting by Rohan: +${message}`;
 
     // Open the mail client
     window.location.href = mailtoLink;
 
     // Reset the form
     this.reset();
-  });
+});
 
 
 // //New Idea for Updatation
@@ -271,7 +273,7 @@ function updateTimer() {
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
     // document.getElementById("count").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
-}   
+}
 
 
 // Function to update targetDate from user input
@@ -285,7 +287,55 @@ function setCountdown() {
     let userNameNew = document.getElementById("name").value;
     document.getElementById("real").innerHTML = userName;
     document.getElementById("realNew").innerHTML = userNameNew;
+
+    
 }
+
+
+
+// Change Photo
+document.getElementById("photoUpload").addEventListener("change", function (event) {
+    let file = event.target.files[0]; // Get the uploaded file
+
+    if (file) {
+        let reader = new FileReader(); // Create a FileReader to read the file
+        reader.onload = function (e) {
+            document.getElementById("rohanImage").src = e.target.result; // Set uploaded image
+        };
+        reader.readAsDataURL(file); // Convert file to a URL
+    }
+});
+document.getElementById("photoUploadCake").addEventListener("change", function (event) {
+    let file = event.target.files[0]; // Get the uploaded file
+
+    if (file) {
+        let reader = new FileReader(); // Create a FileReader to read the file
+        reader.onload = function (e) {
+            document.getElementById("cake").src = e.target.result; // Set uploaded image
+        };
+        reader.readAsDataURL(file); // Convert file to a URL
+    }
+});
+
+//Change Video
+document.getElementById("videoUpload").addEventListener("change", function (event) {
+    let file = event.target.files[0]; // Get the uploaded file
+    let videoElement = document.getElementById("rohanVideo");
+
+    if (file) {
+        let reader = new FileReader(); // Create a FileReader to read the file
+        reader.onload = function (e) {
+            videoElement.src = e.target.result; // Set uploaded video
+            videoElement.style.display = "block"; // Show video
+            videoElement.load(); // Reload video source
+        };
+        reader.readAsDataURL(file); // Convert file to a URL
+    } else {
+        videoElement.style.display = "none"; // Hide video if no file selected
+    }
+});
+
+
 
 // Start the countdown and update every second
 updateTimer();
