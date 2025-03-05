@@ -250,7 +250,7 @@ function update() {
     let customElement = document.getElementsByClassName("custom")[0];
     let check = customElement.style.display;
 
-    if (check === "none" || check === "") {
+    if (check === "none") {
         customElement.style.display = "block";
     } else {
         customElement.style.display = "none";
@@ -276,7 +276,7 @@ function updateTimer() {
 }
 
 
-// Function to update targetDate from user input
+// Function to update everything from User Input
 function setCountdown() {
     const userInput = document.getElementById("dob").value;
     if (userInput) {
@@ -287,8 +287,7 @@ function setCountdown() {
     let userNameNew = document.getElementById("name").value;
     document.getElementById("real").innerHTML = userName;
     document.getElementById("realNew").innerHTML = userNameNew;
-
-    
+    document.getElementById("quizContainer").style.display="none";
 }
 
 
@@ -336,7 +335,124 @@ document.getElementById("videoUpload").addEventListener("change", function (even
 });
 
 
-
 // Start the countdown and update every second
-updateTimer();
-setInterval(updateTimer, 1000);
+// updateTimer();
+// setInterval(updateTimer, 1000);
+
+
+// 📌 Include FFmpeg.js in your project (CDN)
+const loadFFmpeg = async () => {
+    const { createFFmpeg, fetchFile } = FFmpeg;
+    const ffmpeg = createFFmpeg({ log: true });
+    await ffmpeg.load();
+    return { ffmpeg, fetchFile };
+};
+
+// 📌 WebM → MP3 convert karne ka function
+const convertToMP3 = async (webmBlob) => {
+    const { ffmpeg, fetchFile } = await loadFFmpeg();
+    
+    ffmpeg.FS("writeFile", "input.webm", await fetchFile(webmBlob));
+    await ffmpeg.run("-i", "input.webm", "-q:a", "0", "-map", "a", "output.mp3");
+
+    const mp3Data = ffmpeg.FS("readFile", "output.mp3");
+    const mp3Blob = new Blob([mp3Data.buffer], { type: "audio/mp3" });
+    const mp3Url = URL.createObjectURL(mp3Blob);
+
+    // ✅ Sirf MP3 download trigger karo
+    const a = document.createElement("a");
+    a.href = mp3Url;
+    a.download = "recording.mp3";
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(mp3Url);
+};
+
+//Recording
+
+let mediaRecorder;
+let recordedChunks = [];
+let timer;
+let seconds = 0; // ✅ Ab yeh sahi se initialize hai
+
+document.getElementById("startBtn").addEventListener("click", async () => {
+    let countdown = document.getElementById("countdown");
+    countdown.style.display = "block";
+    document.getElementById("startBtn").disabled = true;
+    document.getElementById("stopBtn").style.display = "none";
+    document.getElementById("timer").style.display="block";
+    document.getElementById("startBtn").style.display="none";
+
+    // Countdown animation (5 se 1 tak)
+    for (let i = 5; i > 0; i--) {
+        countdown.innerText = i;
+        countdown.style.transform = "scale(1)";
+        countdown.style.opacity = "0.7";
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        countdown.style.transform = "scale(2.5)";
+        await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+    countdown.style.display = "none";
+
+    try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+            video: { width: 1080, height: 1920, frameRate: 30 }, // ✅ High Quality Video
+            audio: true
+        });
+
+        mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
+        recordedChunks = [];
+
+        mediaRecorder.ondataavailable = (event) => recordedChunks.push(event.data);
+
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: "video/webm" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "screen-recording.webm";
+            document.body.appendChild(a);
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+
+        mediaRecorder.start();
+        document.getElementById("stopBtn").style.display = "inline-block";
+        document.getElementById("startBtn").disabled = true;
+
+        // ✅ Timer Start
+        seconds = 0;
+        updateTimer();
+        timer = setInterval(() => {
+            seconds++;
+            updateTimer();
+        }, 1000);
+
+        // ✅ 60 sec ke baad recording stop ho jayegi
+        setTimeout(() => {
+            if (mediaRecorder.state !== "inactive") {
+                stopRecording();
+            }
+        }, 60000);
+    } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("startBtn").disabled = false;
+    }
+});
+
+document.getElementById("stopBtn").addEventListener("click", stopRecording);
+document.getElementById("stopBtn").style.display = "none";
+
+function stopRecording() {
+    clearInterval(timer);
+    document.getElementById("stopBtn").style.display = "none";
+    document.getElementById("startBtn").style.display="block"
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        mediaRecorder.stop();
+    }
+}
+
+function updateTimer() {
+    document.getElementById("timer").innerText = `Recording: ${seconds}s`;
+}
