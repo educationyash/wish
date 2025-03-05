@@ -46,7 +46,7 @@ body {
     color: white;
     float: right;
     font-size: 23px;
-    margin-top: 109px;
+    margin-top: 40px;
 }
 
 .magic{
@@ -336,4 +336,34 @@ h3 {
 
 input[type="password"] {
   width: 91% !important;
+}
+.custom{
+  display: none;
+}
+
+/* Recording */
+#startBtn{
+  border: none;
+  background-color: yellow;
+  font-size: 20px;
+  margin: 0;
+  margin-top: 70px;
+}
+#stopBtn {
+  display: none;
+  background-color: red;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+#countdown {
+  font-size: 80px;
+  font-weight: bold;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  opacity: 0.7;
+  transition: transform 0.5s, opacity 0.5s;
 }
